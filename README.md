@@ -1,0 +1,2 @@
+# loa-server
+lostark server
