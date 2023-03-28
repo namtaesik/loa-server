@@ -11,7 +11,9 @@ var codeRouter = require("./api/code/code.router");
 console.log("app do1!");
 const cors = require("cors");
 var app = express();
-app.set("port", "8001");
+
+var port = normalizePort(process.env.PORT || "8001");
+app.set("port", port);
 console.log("app do2!");
 app.use(cors());
 app.use(logger("dev"));
