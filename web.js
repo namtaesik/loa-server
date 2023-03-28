@@ -34,6 +34,7 @@ const { swaggerUi, specs } = require("./swagger/swagger");
 app.use("/swagger", swaggerUi.serve, swaggerUi.setup(specs));
 
 // 아래
+var debug = require("debug")("server:server");
 var http = require("http");
 var server = http.createServer(app);
 
