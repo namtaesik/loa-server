@@ -7,6 +7,12 @@ let dbconfig = {
   password: "q!13468570",
   database: "nts0123",
   multipleStatements: true,
+  typeCast: function (field, next) {
+    if (field.type == "VAR_STRING") {
+      return field.string();
+    }
+    return next();
+  },
 };
 // createConnection 을 한 경우 추후 'conn.connect();' 를 할 필요가없다.
 //const conn = mysql.createConnection(dbconfig);
