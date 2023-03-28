@@ -8,13 +8,11 @@ var userRouter = require("./api/user/user.router");
 var raidRouter = require("./api/raid-calendar/raid-calendar.router");
 var loginRouter = require("./api/login/login.router");
 var codeRouter = require("./api/code/code.router");
-console.log("app do1!");
 const cors = require("cors");
 var app = express();
 
 var port = normalizePort(process.env.PORT || "8001");
 app.set("port", port);
-console.log("app do2!");
 app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
