@@ -41,6 +41,10 @@ module.exports = {
   addRaidCalendar: async (param, callback) => {
     console.log(param.body);
     //예외처리
+    if ((param.body.attackId ?? -1) < 0) {
+      callback("레이드 일정 ID가 누락되었습니다.", null);
+      return;
+    }
     if ((param.body.attackDate ?? "") == "") {
       callback("일자가 누락되었습니다.", null);
       return;
@@ -53,13 +57,26 @@ module.exports = {
       callback("일자가 형식에 맞지 않습니다.", null);
     }
     if ((param.body.bossCode ?? "") == "") {
-      callback("컨텐츠이름이 누락되었습니다.", null);
+      callback("컨텐츠 이름이 누락되었습니다.", null);
+      return;
+    }
+    if (param.body.isUnknown) {
+      callback("일정 미정여부가 누락되었습니다.", null);
+      return;
+    }
+    if ((param.body.unknownRemark ?? -1) < 0) {
+      callback("일정 미정 비고가 누락되었습니다.", null);
       return;
     }
 
     mysql.conn.query(
-      "call AddRaidCalendar(?,?)", //
-      [param.body.attackDate, param.body.bossCode], // ? 에 들어갈 param 배열.
+      "call AddRaidCalendar(?,?,?,?)", //
+      [
+        param.body.attackDate,
+        param.body.bossCode,
+        param.body.isUnknown,
+        param.body.unknownRemark,
+      ], // ? 에 들어갈 param 배열.
       (err, rows, fields) => {
         if (err) {
           callback(err, null);
@@ -170,15 +187,15 @@ module.exports = {
       callback("일자가 형식에 맞지 않습니다.", null);
     }
     if ((param.body.bossCode ?? "") == "") {
-      callback("레이드 일정 ID가 누락되었습니다.", null);
+      callback("컨텐츠 이름이 누락되었습니다.", null);
       return;
     }
     if (param.body.isUnknown) {
-      callback("레이드 일정 ID가 누락되었습니다.", null);
+      callback("일정 미정여부가 누락되었습니다.", null);
       return;
     }
     if ((param.body.unknownRemark ?? -1) < 0) {
-      callback("레이드 일정 ID가 누락되었습니다.", null);
+      callback("일정 미정 비고가 누락되었습니다.", null);
       return;
     }
 
