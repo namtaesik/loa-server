@@ -10,6 +10,9 @@ let dbconfig = {
   typeCast: function (field, next) {
     if (field.type == "VAR_STRING") {
       return field.string();
+    } else if (field.type === "BIT" && field.length === 1) {
+      var bytes = field.buffer();
+      return bytes[0] === 1;
     }
     return next();
   },
