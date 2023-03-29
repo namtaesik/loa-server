@@ -56,7 +56,7 @@ module.exports = {
       callback("컨텐츠 이름이 누락되었습니다.", null);
       return;
     }
-    if (param.body.isUnknown) {
+    if (param.body.isUnknown == null) {
       callback("일정 미정여부가 누락되었습니다.", null);
       return;
     }
