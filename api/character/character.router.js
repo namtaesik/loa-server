@@ -95,5 +95,6 @@ router.post("/add", controller.addCharacter);
  *      description: 조회 성공
  */
 router.post("/delete", controller.deleteCharacter);
+router.post("/edit", controller.editCharacter);
 
 module.exports = router;
