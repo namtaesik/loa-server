@@ -41,10 +41,6 @@ module.exports = {
   addRaidCalendar: async (param, callback) => {
     console.log(param.body);
     //예외처리
-    if ((param.body.attackId ?? -1) < 0) {
-      callback("레이드 일정 ID가 누락되었습니다.", null);
-      return;
-    }
     if ((param.body.attackDate ?? "") == "") {
       callback("일자가 누락되었습니다.", null);
       return;
