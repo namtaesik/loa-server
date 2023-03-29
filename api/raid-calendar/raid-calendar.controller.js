@@ -115,4 +115,23 @@ module.exports = {
       return;
     }
   },
+  updateRaidCalendar: async (req, res) => {
+    try {
+      await Service.updateRaidCalendar(req, (err, result) => {
+        if (err != null) {
+          console.log(err);
+          res.send(500, err);
+          return;
+        }
+        if (result != undefined) {
+          res.send(result);
+          return;
+        }
+      });
+    } catch (err) {
+      console.log(err);
+      res.send(500, err);
+      return;
+    }
+  },
 };

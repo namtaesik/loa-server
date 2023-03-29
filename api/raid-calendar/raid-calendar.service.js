@@ -152,4 +152,53 @@ module.exports = {
       }
     );
   },
+  updateRaidCalendar: async (param, callback) => {
+    //예외처리
+    if ((param.body.attackId ?? -1) < 0) {
+      callback("레이드 일정 ID가 누락되었습니다.", null);
+      return;
+    }
+    if ((param.body.attackDate ?? "") == "") {
+      callback("일자가 누락되었습니다.", null);
+      return;
+    }
+
+    if (
+      param.body.attackDate instanceof Date &&
+      !isNaN(param.body.attackDate)
+    ) {
+      callback("일자가 형식에 맞지 않습니다.", null);
+    }
+    if ((param.body.bossCode ?? "") == "") {
+      callback("레이드 일정 ID가 누락되었습니다.", null);
+      return;
+    }
+    if (param.body.isUnknown) {
+      callback("레이드 일정 ID가 누락되었습니다.", null);
+      return;
+    }
+    if ((param.body.unknownRemark ?? -1) < 0) {
+      callback("레이드 일정 ID가 누락되었습니다.", null);
+      return;
+    }
+
+    mysql.conn.query(
+      "call UpdateRaidCalendar(?,?,?,?,?)", //
+      [
+        param.body.attackId,
+        param.body.attackDate,
+        param.body.bossCode,
+        param.body.isUnknown,
+        param.body.unknownRemark,
+      ], // ? 에 들어갈 param 배열.
+      (err, rows, fields) => {
+        if (err) {
+          callback(err, null);
+          return;
+        }
+        callback(null, rows[0]); // controller에서 넘겨준 callback 함수에 값을 넣어준다.
+        return;
+      }
+    );
+  },
 };

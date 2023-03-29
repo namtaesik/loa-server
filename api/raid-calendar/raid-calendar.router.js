@@ -141,4 +141,5 @@ router.post("/join", controller.addJoinRaid);
  */
 router.post("/quit", controller.quitRaid);
 router.post("/remove", controller.removeRaidCalendar);
+router.post("/update", controller.updateRaidCalendar);
 module.exports = router;
