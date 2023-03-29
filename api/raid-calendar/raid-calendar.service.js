@@ -64,14 +64,18 @@ module.exports = {
       callback("일정 미정 비고가 누락되었습니다.", null);
       return;
     }
-
+    if ((param.body.userId ?? "") == "") {
+      callback("유저ID가 누락되었습니다.", null);
+      return;
+    }
     mysql.conn.query(
-      "call AddRaidCalendar(?,?,?,?)", //
+      "call AddRaidCalendar(?,?,?,?,?)", //
       [
         param.body.attackDate,
         param.body.bossCode,
         param.body.isUnknown,
         param.body.unknownRemark,
+        param.body.userId,
       ], // ? 에 들어갈 param 배열.
       (err, rows, fields) => {
         if (err) {
