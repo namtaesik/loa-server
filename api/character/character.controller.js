@@ -75,4 +75,21 @@ module.exports = {
       res.send(500, err);
     }
   },
+  setMainCharacter: async (req, res) => {
+    try {
+      await Service.editCharacter(req, (err, result) => {
+        if (err != null) {
+          console.log(err);
+          res.send(500, err);
+          return;
+        }
+        if (result != undefined) {
+          res.send(result);
+        }
+      });
+    } catch (err) {
+      console.log(err);
+      res.send(500, err);
+    }
+  },
 };

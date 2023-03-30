@@ -96,5 +96,6 @@ router.post("/add", controller.addCharacter);
  */
 router.post("/delete", controller.deleteCharacter);
 router.post("/edit", controller.editCharacter);
+router.post("/set-main-character", controller.setMainCharacter);
 
 module.exports = router;
