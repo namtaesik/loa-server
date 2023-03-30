@@ -67,7 +67,7 @@ module.exports = {
       return;
     }
     if ((param.body.characterId ?? -1) < 0) {
-      callback("유저이름이 누락되었습니다.", null);
+      callback("캐릭터ID가 누락되었습니다.", null);
       return;
     }
 
@@ -118,6 +118,30 @@ module.exports = {
         param.body.class,
         param.body.characterLevel,
       ], // ? 에 들어갈 param 배열.
+      (err, rows, fields) => {
+        if (err) {
+          callback(err, null);
+          return;
+        }
+        callback(null, rows[0]); // controller에서 넘겨준 callback 함수에 값을 넣어준다.
+        return;
+      }
+    );
+  },
+  setMainCharacter: async (param, callback) => {
+    //예외처리
+    if ((param.body.userId ?? "") == "") {
+      callback("유저ID가 누락되었습니다.", null);
+      return;
+    }
+    if ((param.body.characterId ?? -1) < 0) {
+      callback("캐릭터ID가 누락되었습니다.", null);
+      return;
+    }
+
+    mysql.conn.query(
+      "call SetMainCharacter(?,?)", //
+      [param.body.userId, param.body.characterId], // ? 에 들어갈 param 배열.
       (err, rows, fields) => {
         if (err) {
           callback(err, null);
