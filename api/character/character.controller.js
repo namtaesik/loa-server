@@ -77,7 +77,7 @@ module.exports = {
   },
   setMainCharacter: async (req, res) => {
     try {
-      await Service.editCharacter(req, (err, result) => {
+      await Service.setMainCharacter(req, (err, result) => {
         if (err != null) {
           console.log(err);
           res.send(500, err);
