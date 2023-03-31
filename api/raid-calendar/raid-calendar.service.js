@@ -218,4 +218,47 @@ module.exports = {
       }
     );
   },
+  editRaidDetail: async (param, callback) => {
+    //예외처리
+    if ((param.body.attackId ?? -1) < 0) {
+      callback("레이드 일정 ID가 누락되었습니다.", null);
+      return;
+    }
+    if ((param.body.userId ?? -1) < 0) {
+      callback("유저ID가 누락되었습니다.", null);
+      return;
+    }
+    if ((param.body.beforeCharacterId ?? -1) < 0) {
+      callback("기존 신청 캐릭터ID가 누락되었습니다.", null);
+      return;
+    }
+    if ((param.body.characterId ?? -1) < 0) {
+      callback("캐릭터ID가 누락되었습니다.", null);
+      return;
+    }
+    if ((param.body.proficiency ?? "") == "") {
+      callback("숙련도가 누락되었습니다.", null);
+      return;
+    }
+
+    mysql.conn.query(
+      "call EditRaidDetail(?,?,?,?,?,?)", //
+      [
+        param.body.attackId,
+        param.body.userId,
+        param.body.beforeCharacterId,
+        param.body.characterId,
+        param.body.remark ?? "",
+        param.body.proficiency,
+      ], // ? 에 들어갈 param 배열.
+      (err, rows, fields) => {
+        if (err) {
+          callback(err, null);
+          return;
+        }
+        callback(null, rows[0]); // controller에서 넘겨준 callback 함수에 값을 넣어준다.
+        return;
+      }
+    );
+  },
 };
