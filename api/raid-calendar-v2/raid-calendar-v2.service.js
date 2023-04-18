@@ -3,7 +3,7 @@ const mysql = require("../../public/javascripts/mysql");
 module.exports = {
   getRaidCalendar: async (param, callback) => {
     //예외처리
-
+    console.log(param.query);
     mysql.conn.query(
       "call GetRaidCalendarV2(?)", //
       [param.query.contentsCode ?? ""], // ? 에 들어갈 param 배열.
