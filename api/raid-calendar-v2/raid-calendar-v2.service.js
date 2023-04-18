@@ -232,7 +232,7 @@ module.exports = {
       [
         param.body.attackId,
         param.body.attackDate,
-        param.body.bossCode,
+        param.body.remark,
         param.body.isUnknown,
         param.body.unknownRemark,
         param.body.limitMember,
