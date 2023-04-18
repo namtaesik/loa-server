@@ -82,7 +82,7 @@ module.exports = {
     //   return;
     // }
     mysql.conn.query(
-      "call AddRaidCalendar(?,?,?,?,?,?,?,?)", //
+      "call AddRaidCalendarV2(?,?,?,?,?,?,?,?)", //
       [
         param.body.attackDate,
         param.body.remark,
@@ -228,7 +228,7 @@ module.exports = {
     //   return;
     // }
     mysql.conn.query(
-      "call UpdateRaidCalendar(?,?,?,?,?,?,?,?)", //
+      "call UpdateRaidCalendarV2(?,?,?,?,?,?,?,?)", //
       [
         param.body.attackId,
         param.body.attackDate,
