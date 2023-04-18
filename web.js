@@ -6,12 +6,13 @@ var logger = require("morgan");
 var characterRouter = require("./api/character/character.router");
 var userRouter = require("./api/user/user.router");
 var raidRouter = require("./api/raid-calendar/raid-calendar.router");
+var raidV2Router = require("./api/raid-calendar-v2/raid-calendar-v2.router");
 var loginRouter = require("./api/login/login.router");
 var codeRouter = require("./api/code/code.router");
 const cors = require("cors");
 var app = express();
 
-var port = normalizePort(process.env.PORT || "8001");
+var port = normalizePort(process.env.PORT || "3001");
 app.set("port", port);
 app.use(cors());
 app.use(logger("dev"));
@@ -26,6 +27,7 @@ app.use("/user", userRouter);
 app.use("/raid-calendar", raidRouter);
 app.use("/login", loginRouter);
 app.use("/code", codeRouter);
+app.use("/raid-calendar-v2", raidV2Router);
 
 // Swagger
 const { swaggerUi, specs } = require("./swagger/swagger");
