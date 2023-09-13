@@ -11,6 +11,8 @@ var loginRouter = require("./api/login/login.router");
 var loginV2Router = require("./api/login-v2/login-v2.router");
 var logoutRouter = require("./api/logout/logout.router");
 var codeRouter = require("./api/code/code.router");
+var jobOfferRouter = require("./api/job-offer/job-offer.router");
+var jobOfferCommentRouter = require("./api/job-offer/comment/job-offer-comment.router");
 const cors = require("cors");
 var app = express();
 
@@ -32,6 +34,8 @@ app.use("/login-v2", loginV2Router);
 app.use("/logout", logoutRouter);
 app.use("/code", codeRouter);
 app.use("/raid-calendar-v2", raidV2Router);
+app.use("/job-offer", jobOfferRouter);
+app.use('/job-offer/comment',jobOfferCommentRouter);
 
 // Swagger
 const { swaggerUi, specs } = require("./swagger/swagger");

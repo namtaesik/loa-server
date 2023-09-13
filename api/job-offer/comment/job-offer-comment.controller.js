@@ -1,12 +1,12 @@
 // Controller 는 요청을 받고 Service에 요청해서 반환값을 보내기만하는 열할
 // 실제 비즈니스 로직은 모두 Service에 넣는다.
-const Service = require("./job-offer.service");
+const Service = require("./job-offer-comment.service");
 
 module.exports = {
-  addJobOfferMst: async (req, res) => {
+  getJobOfferComments: async (req, res) => {
     try {
       
-      await Service.addJobOfferMst(req, (err, result) => {
+      await Service.getJobOfferComments(req, (err, result) => {
         if (err != null) {
           console.log(err);
           res.send(500, err);
@@ -22,10 +22,10 @@ module.exports = {
       return;
     }
   },
-  getJobOfferMst: async (req, res) => {
+  addJobOfferComment: async (req, res) => {
     try {
       
-      await Service.getJobOfferMst(req, (err, result) => {
+      await Service.addJobOfferComment(req, (err, result) => {
         if (err != null) {
           console.log(err);
           res.send(500, err);
@@ -41,10 +41,10 @@ module.exports = {
       return;
     }
   },
-  updateJobOfferMst: async (req, res) => {
+  updateJobOfferComment: async (req, res) => {
     try {
       
-      await Service.updateJobOfferMst(req, (err, result) => {
+      await Service.updateJobOfferComment(req, (err, result) => {
         if (err != null) {
           console.log(err);
           res.send(500, err);
@@ -60,10 +60,10 @@ module.exports = {
       return;
     }
   },
-  deleteJobOfferMst: async (req, res) => {
+  deleteJobOfferComment: async (req, res) => {
     try {
       
-      await Service.deleteJobOfferMst(req, (err, result) => {
+      await Service.deleteJobOfferComment(req, (err, result) => {
         if (err != null) {
           console.log(err);
           res.send(500, err);
@@ -79,10 +79,10 @@ module.exports = {
       return;
     }
   },
-  getJobOfferList: async (req, res) => {
+  addJobOfferCommentDetail: async (req, res) => {
     try {
       
-      await Service.getJobOfferList(req, (err, result) => {
+      await Service.addJobOfferCommentDetail(req, (err, result) => {
         if (err != null) {
           console.log(err);
           res.send(500, err);
@@ -98,10 +98,10 @@ module.exports = {
       return;
     }
   },
-  addJobOfferHashTagMst: async (req, res) => {
+  updateJobOfferCommentDetail: async (req, res) => {
     try {
-     
-      await Service.addJobOfferHashTagMst(req, (err, result) => {
+      
+      await Service.updateJobOfferCommentDetail(req, (err, result) => {
         if (err != null) {
           console.log(err);
           res.send(500, err);
@@ -116,11 +116,11 @@ module.exports = {
       res.send(500, err);
       return;
     }
-  }, 
-  deleteJobOfferHashTag: async (req, res) => {
+  },
+  deleteJobOfferCommentDetail: async (req, res) => {
     try {
       
-      await Service.deleteJobOfferHashTag(req, (err, result) => {
+      await Service.deleteJobOfferCommentDetail(req, (err, result) => {
         if (err != null) {
           console.log(err);
           res.send(500, err);
