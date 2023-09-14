@@ -220,7 +220,7 @@ module.exports = {
   },
   
   addJobOfferHashTagMst: async (param, callback)=>{
-     var hashArr = JSON.parse(param.body?.hashTagArr??'[]');
+     //var hashArr = JSON.parse(param.body?.hashTagArr??'[]');
      if (param.body == null) {
       callback("파라미터가 누락되었습니다.", null);
       return;
@@ -229,18 +229,18 @@ module.exports = {
       callback("offerId가 누락되었습니다.", null);
       return;
     }
-    if((hashArr??[]).length <= 0 ){
+    if((param.body?.hashTagArr??[]).length <= 0 ){
       callback("hashTagArr가 누락되었습니다.", null);
       return;
 
     }
        //console.log('offer ID : ',rows[0][0])
-       console.log(hashArr);
-       for(var i=0;i< hashArr.length ;i++){
-         console.log(hashArr[i]);
+       console.log(param.body?.hashTagArr);
+       for(var i=0;i< param.body?.hashTagArr.length ;i++){
+         console.log(param.body?.hashTagArr[i]);
          await mysql.conn.query(
            "call AddJobOfferHashTagMst(?,?)", 
-           [hashArr[i],
+           [param.body?.hashTagArr[i],
            param.body?.offerId
            ], // ? 에 들어갈 param 배열.
            (err, rows, fields) => {

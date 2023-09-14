@@ -24,9 +24,14 @@ module.exports = {
           //var commentDetails = 
           //if(rows[0][0].CommentDetails)
           // 대댓글 처리
-          if(rows[0][0]?.CommentDetails!=undefined){
-          rows[0][0].CommentDetails = JSON.parse(rows[0][0]?.CommentDetails);
-          }
+      
+            rows[0]?.forEach((item)=>{
+              if(item.CommentDetails!=undefined){
+                item.CommentDetails = JSON.parse(item?.CommentDetails);
+              }
+            })
+          //rows[0][0].CommentDetails = JSON.parse(rows[0][0]?.CommentDetails);
+          
             callback(null, rows[0]); // controller에서 넘겨준 callback 함수에 값을 넣어준다.
           
         }
