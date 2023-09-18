@@ -238,7 +238,7 @@ module.exports = {
        console.log(param.body?.hashTagArr);
        for(var i=0;i< param.body?.hashTagArr.length ;i++){
          console.log(param.body?.hashTagArr[i]);
-         await mysql.conn.query(
+         mysql.conn.query(
            "call AddJobOfferHashTagMst(?,?)", 
            [param.body?.hashTagArr[i],
            param.body?.offerId
@@ -259,8 +259,6 @@ module.exports = {
              } else {
                // 반환받은 hasId 정보가 없을 경우
                console.error("HashID 등록에 실패하였습니다.");
-              
-               
              }
            }
          );
@@ -280,16 +278,11 @@ module.exports = {
      callback("offerId가 누락되었습니다.", null);
      return;
    }
-   if ((param.body?.hashId ??-1) <=0) {
-    callback("hashId가 누락되었습니다.", null);
-    return;
-  }
+   
   try{
         await mysql.conn.query(
-          "call DeleteJobOfferHashTag(?,?)", 
-          [ param.body?.hashId,
-          param.body?.offerId
-          ], // ? 에 들어갈 param 배열.
+          "call DeleteJobOfferHashTag(?)", 
+          [ param.body?.offerId], // ? 에 들어갈 param 배열.
           (err, rows, fields) => {
             
             if (err) {
