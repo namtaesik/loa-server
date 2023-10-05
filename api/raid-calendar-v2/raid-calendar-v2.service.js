@@ -76,12 +76,13 @@ module.exports = {
       callback("유저ID가 누락되었습니다.", null);
       return;
     }
-    if ((param.body.limitMember ?? -1) < 0) {
-      callback("제한인원이 누락되었습니다.", null);
-      return;
-    }
+    // 임시주석
+    // if ((param.body.limitMember ?? -1) < 0) {
+    //   callback("제한인원이 누락되었습니다.", null);
+    //   return;
+    // }
     mysql.conn.query(
-      "call AddRaidCalendar(?,?,?,?,?,?,?,?)", //
+      "call AddRaidCalendarV2(?,?,?,?,?,?,?,?)", //
       [
         param.body.attackDate,
         param.body.remark,
@@ -221,16 +222,17 @@ module.exports = {
       callback("일정 미정 비고가 누락되었습니다.", null);
       return;
     }
-    if ((param.body.limitMember ?? -1) < 0) {
-      callback("제한인원이 누락되었습니다.", null);
-      return;
-    }
+    // 임시주석
+    // if ((param.body.limitMember ?? -1) < 0) {
+    //   callback("제한인원이 누락되었습니다.", null);
+    //   return;
+    // }
     mysql.conn.query(
-      "call UpdateRaidCalendar(?,?,?,?,?,?,?,?)", //
+      "call UpdateRaidCalendarV2(?,?,?,?,?,?,?,?)", //
       [
         param.body.attackId,
         param.body.attackDate,
-        param.body.bossCode,
+        param.body.remark,
         param.body.isUnknown,
         param.body.unknownRemark,
         param.body.limitMember,

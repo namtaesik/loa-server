@@ -8,7 +8,11 @@ var userRouter = require("./api/user/user.router");
 var raidRouter = require("./api/raid-calendar/raid-calendar.router");
 var raidV2Router = require("./api/raid-calendar-v2/raid-calendar-v2.router");
 var loginRouter = require("./api/login/login.router");
+var loginV2Router = require("./api/login-v2/login-v2.router");
+var logoutRouter = require("./api/logout/logout.router");
 var codeRouter = require("./api/code/code.router");
+var jobOfferRouter = require("./api/job-offer/job-offer.router");
+var jobOfferCommentRouter = require("./api/job-offer/comment/job-offer-comment.router");
 const cors = require("cors");
 var app = express();
 
@@ -26,12 +30,26 @@ app.use("/character", characterRouter);
 app.use("/user", userRouter);
 app.use("/raid-calendar", raidRouter);
 app.use("/login", loginRouter);
+app.use("/login-v2", loginV2Router);
+app.use("/logout", logoutRouter);
 app.use("/code", codeRouter);
 app.use("/raid-calendar-v2", raidV2Router);
+app.use("/job-offer", jobOfferRouter);
+app.use('/job-offer/comment',jobOfferCommentRouter);
 
 // Swagger
 const { swaggerUi, specs } = require("./swagger/swagger");
 app.use("/swagger", swaggerUi.serve, swaggerUi.setup(specs));
+
+// 세션 구현
+const session = require("express-session");
+app.use(
+  session({
+    secret: process.env.SESSION_KEY,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
 // 아래
 var debug = require("debug")("server:server");

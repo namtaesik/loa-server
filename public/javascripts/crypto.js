@@ -9,7 +9,7 @@ module.exports = {
       data,
       CryptoJS.enc.Utf8.parse(secretKey),
       {
-        iv: CryptoJS.enc.Utf8.parse(""),
+        iv: CryptoJS.enc.Utf8.parse(process.env.REACT_APP_IV_KEY),
         padding: CryptoJS.pad.Pkcs7,
         mode: CryptoJS.mode.CBC,
       }
@@ -25,7 +25,7 @@ module.exports = {
       encryptedData,
       CryptoJS.enc.Utf8.parse(secretKey),
       {
-        iv: CryptoJS.enc.Utf8.parse(""),
+        iv: CryptoJS.enc.Utf8.parse(process.env.REACT_APP_IV_KEY),
         padding: CryptoJS.pad.Pkcs7,
         mode: CryptoJS.mode.CBC,
       }

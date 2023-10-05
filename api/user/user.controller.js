@@ -40,4 +40,23 @@ module.exports = {
       return;
     }
   },
+  updateUser: async (req, res) => {
+    try {
+      await Service.updateUser(req, (err, result) => {
+        if (err != null) {
+          console.log(err);
+          res.send(500, err);
+          return;
+        }
+        if (result != undefined) {
+          res.send(result);
+          return;
+        }
+      });
+    } catch (err) {
+      console.log(err);
+      res.send(500, err);
+      return;
+    }
+  },
 };

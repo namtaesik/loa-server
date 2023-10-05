@@ -52,5 +52,6 @@ router.get("/", user.getUser);
  *                example: "User"
  */
 router.post("/", user.addUser);
+router.post("/update", user.updateUser);
 
 module.exports = router;

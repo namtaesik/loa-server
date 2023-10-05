@@ -13,6 +13,10 @@ let dbconfig = {
     } else if (field.type === "BIT" && field.length === 1) {
       var bytes = field.buffer();
       return bytes[0] === 1;
+    } else if(field.type == "BLOB") {
+      // 23.09.13 | 이부분 다른 타입 전부그냥 field.string() 처리. 만약 어디 오류나면 바꿔야함.
+      // mysql에서 TEXT타입이 넘어왔을 때 Buffer로 표시되는 문제.
+      return field.string();
     }
     return next();
   },
@@ -22,11 +26,19 @@ let dbconfig = {
 
 // pool로 관리.
 const pool = mysql.createPool(dbconfig);
-const getConnectionPool = (callback) => {
-  pool.getConnection((err, conn) => {
-    if (!err) callback(conn);
+
+function getConnection(callback) {
+  console.debug('getconnection do');
+  pool.getConnection(function (err, conn) {
+    if(!err) {
+      console.info('coonn Response');
+      callback(conn);
+    }
+    else{
+      console.debug('err ',err);
+    }
   });
-};
+}
 
 // conn.connect();
 
@@ -37,4 +49,4 @@ const getConnectionPool = (callback) => {
 
 // conn.end();
 
-module.exports = { conn: pool, sql: mysql };
+module.exports = { conn: pool,getConnection:getConnection, sql: mysql };
