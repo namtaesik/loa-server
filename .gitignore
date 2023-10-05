@@ -105,3 +105,4 @@ dist
 
 # .env 파일
 .env
+.env.production
